@@ -1,0 +1,9 @@
+\\tsclient\S\,\CS Projects\CompendiumApp\bin\Debug\CompendiumApp.exe.config
+\\tsclient\S\,\CS Projects\CompendiumApp\bin\Debug\CompendiumApp.exe
+\\tsclient\S\,\CS Projects\CompendiumApp\bin\Debug\CompendiumApp.pdb
+\\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.csprojAssemblyReference.cache
+\\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.Properties.Resources.resources
+\\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.csproj.GenerateResource.cache
+\\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.csproj.CoreCompileInputs.cache
+\\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.exe
+\\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.pdb
