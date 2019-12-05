@@ -37,10 +37,11 @@
             // 
             this.questionString.AutoSize = true;
             this.questionString.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.questionString.Location = new System.Drawing.Point(344, 71);
+            this.questionString.Location = new System.Drawing.Point(223, 145);
             this.questionString.Name = "questionString";
             this.questionString.Size = new System.Drawing.Size(0, 29);
             this.questionString.TabIndex = 0;
+            this.questionString.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // answerBox
             // 

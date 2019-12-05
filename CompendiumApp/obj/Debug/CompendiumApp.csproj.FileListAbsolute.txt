@@ -7,3 +7,4 @@
 \\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.csproj.CoreCompileInputs.cache
 \\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.exe
 \\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.pdb
+\\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.Form1.resources
