@@ -51,16 +51,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CSDefsDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="MainProgram.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainProgram.Designer.cs">
+      <DependentUpon>MainProgram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TopicSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TopicSelect.Designer.cs">
+      <DependentUpon>TopicSelect.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="MainProgram.resx">
+      <DependentUpon>MainProgram.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -71,6 +77,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="TopicSelect.resx">
+      <DependentUpon>TopicSelect.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="CSDefsDataSet.xsc">
       <DependentUpon>CSDefsDataSet.xsd</DependentUpon>
     </None>
