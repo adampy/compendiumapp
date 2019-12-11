@@ -119,13 +119,19 @@ namespace CompendiumApp
             command.Dispose();
         }
 
-        public static void AddTerm(Topic topic, string[] terms)
+        public static void AddTerm(Topic topic, string[] terms, string definition)
         {
             string termString = string.Join(",", terms);
             int topicId = topic.id;
             OleDbCommand command = new OleDbCommand();
-            command.CommandText = "INSERT INTO terms (`Topic Number`, `Term`) values (%, %)";
-            command.Parameters.Add("`Topic Number`", )
+            command.Connection = DataController.con;
+            command.CommandText = "INSERT INTO terms (`Topic Number`, Term, Definition) values (?, ?, ?)";
+            command.Parameters.AddWithValue("`Topic Number`", topicId);
+            command.Parameters.AddWithValue("Term", termString);
+            command.Parameters.AddWithValue("Definition", definition);
+            con.Open();
+            command.ExecuteNonQuery();
+            con.Close();
         }
     }
 

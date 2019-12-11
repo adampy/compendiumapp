@@ -78,7 +78,10 @@ namespace CompendiumApp
         private void NewQuestionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string[] terms = new string[2];
-            DataController.AddTerm(this.currentTopic, terms);
+            string definition = "Test defintion";
+            terms[0] = "Test answer 1";
+            terms[1] = "Test answer 2";
+            DataController.AddTerm(this.currentTopic, terms, definition);
         }
     }
 }
