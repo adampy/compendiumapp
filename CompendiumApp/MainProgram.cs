@@ -13,65 +13,30 @@ namespace CompendiumApp
 {
     public partial class MainProgram : Form
     {
-        List<Topic> topics = new List<Topic>();
-        List<Term> terms = new List<Term>();
         Random rand = new Random();
         Term currentTerm;
-        int termsLength;
+        Topic currentTopic;
 
-        public MainProgram()
+        public MainProgram(List<Topic> topics, Topic topic)
         {
+            this.currentTopic = topic;
             InitializeComponent();
-            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\tsclient\S\,\CSDefs.accdb";
-            OleDbConnection con = new OleDbConnection(connectionString);
-            con.Open();
-
-            // Get topics from DB
-            OleDbCommand command = new OleDbCommand();
-            command.CommandText = "SELECT * FROM topics";
-            command.Connection = con;
-
-            using (OleDbDataReader reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    int id = reader.GetInt32(0);
-                    string name = reader.GetString(1);
-                    Topic topic = new Topic(id, name);
-                    this.topics.Add(topic);
-                }
-            }
-            command.Dispose();
-
-            // Get terms from DB
-            OleDbCommand command2 = new OleDbCommand();
-            command2.CommandText = "SELECT * FROM terms";
-            command2.Connection = con;
-
-            using (OleDbDataReader reader = command2.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    int termId = reader.GetInt32(0); //id
-                    int topicId = reader.GetInt32(1); //topic number
-                    string termString = reader.GetString(2); //term
-                    string definition = reader.GetString(3); //definition
-                    Term term = new Term(termId, topicId, termString, definition);
-
-                    this.terms.Add(term);
-                }
-            }
-            command2.Dispose();
+            this.FormClosed += new FormClosedEventHandler(ProgramClosedHandler.FormClosed);
+            topicString.Text = this.currentTopic.name;
             this.NextQuestion();
         }
 
         public void NextQuestion()
         {
-            this.termsLength = this.terms.Count();
-            // TODO: the code below throws an error if all questions have been asked
-            int random = this.rand.Next(0, this.termsLength - 1);
-            this.currentTerm = this.terms[random];
-            this.terms.RemoveAt(random);
+            int random = this.rand.Next(0, DataController.terms.Count - 1);
+            Term newTerm = DataController.terms[random];
+
+            while (newTerm.topic.id != this.currentTopic.id)
+            {
+                random = this.rand.Next(0, DataController.terms.Count - 1);
+                newTerm = DataController.terms[random];
+            }
+            this.currentTerm = newTerm;
             this.questionString.Text = this.currentTerm.definition;
         }
 
@@ -84,54 +49,36 @@ namespace CompendiumApp
             {
                 if (answer.ToLower() == term.ToLower())
                 {
-                    MessageBox.Show("Correct");
+                    this.NextQuestion();
                 }
                 else
                 {
                     MessageBox.Show("Incorrect - " + term);
                 }
-                this.NextQuestion();
-
-                /*foreach (string[] data in this.topics)
-                {
-                
-                }
-
-                foreach (string[] data in this.terms)
-                {
-
-                }*/
             }
         }
-    }
 
-    public class Term
-    {
-        public string[] term; //answer
-        public string definition; //question
-        public int id;
-        public int topicId;
-
-        public Term(int id, int topicId, string answer, string question)
+        // Tool Strip Procedures
+        private void RestartToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.id = id;
-            this.topicId = topicId;
-            this.definition = question;
-            //answer checks - multiple answers
-            this.term = answer.Split(',');
-
+            Application.Restart();
         }
-    }
 
-    public class Topic
-    {
-        public int topicId;
-        public string topicName;
-        
-        public Topic(int id, string name)
+        private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.topicId = id;
-            this.topicName = name;
+            ProgramClosedHandler.FormClosed(sender, e);
+        }
+
+        private void CheToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string answerString = "Answer(s) are: " + string.Join(", ", this.currentTerm.term);
+            MessageBox.Show(answerString);
+        }
+
+        private void NewQuestionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string[] terms = new string[2];
+            DataController.AddTerm(this.currentTopic, terms);
         }
     }
 }
