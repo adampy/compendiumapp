@@ -14,8 +14,8 @@ namespace CompendiumApp
     public partial class MainProgram : Form
     {
         Random rand = new Random();
-        Term currentTerm;
-        Topic currentTopic;
+        public Term currentTerm;
+        public Topic currentTopic;
 
         public MainProgram(List<Topic> topics, Topic topic)
         {
@@ -77,11 +77,13 @@ namespace CompendiumApp
 
         private void NewQuestionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string[] terms = new string[2];
+            /*string[] terms = new string[2];
             string definition = "Test defintion";
             terms[0] = "Test answer 1";
             terms[1] = "Test answer 2";
-            DataController.AddTerm(this.currentTopic, terms, definition);
+            DataController.AddTerm(this.currentTopic, terms, definition);*/
+            NewTerm newterm = new NewTerm();
+            newterm.ShowDialog();
         }
     }
 }

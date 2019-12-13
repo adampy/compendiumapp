@@ -32,6 +32,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.topicBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.csDefsDataSet1 = new CompendiumApp.CSDefsDataSet();
+            ((System.ComponentModel.ISupportInitialize)(this.csDefsDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -76,6 +78,11 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "by Adam Crawley";
             // 
+            // csDefsDataSet1
+            // 
+            this.csDefsDataSet1.DataSetName = "CSDefsDataSet";
+            this.csDefsDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // TopicSelect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -87,6 +94,7 @@
             this.Controls.Add(this.label1);
             this.Name = "TopicSelect";
             this.Text = "Topic Selector";
+            ((System.ComponentModel.ISupportInitialize)(this.csDefsDataSet1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -98,5 +106,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox topicBox;
         private System.Windows.Forms.Label label2;
+        private CSDefsDataSet csDefsDataSet1;
     }
 }

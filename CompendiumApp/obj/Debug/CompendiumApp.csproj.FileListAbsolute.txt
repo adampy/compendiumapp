@@ -9,3 +9,4 @@
 \\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.pdb
 \\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.MainProgram.resources
 \\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.TopicSelect.resources
+\\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.NewTerm.resources
