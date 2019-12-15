@@ -37,11 +37,11 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.restartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.topicString = new System.Windows.Forms.Label();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newQuestionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newTermToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.topicString = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,16 +125,6 @@
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.QuitToolStripMenuItem_Click);
             // 
-            // topicString
-            // 
-            this.topicString.AutoSize = true;
-            this.topicString.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Italic);
-            this.topicString.Location = new System.Drawing.Point(12, 24);
-            this.topicString.Name = "topicString";
-            this.topicString.Size = new System.Drawing.Size(74, 18);
-            this.topicString.TabIndex = 4;
-            this.topicString.Text = "topicString";
-            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -155,18 +145,28 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newQuestionToolStripMenuItem});
+            this.newTermToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.newToolStripMenuItem.Text = "New";
             // 
-            // newQuestionToolStripMenuItem
+            // newTermToolStripMenuItem
             // 
-            this.newQuestionToolStripMenuItem.Name = "newQuestionToolStripMenuItem";
-            this.newQuestionToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newQuestionToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-            this.newQuestionToolStripMenuItem.Text = "New Question";
-            this.newQuestionToolStripMenuItem.Click += new System.EventHandler(this.NewQuestionToolStripMenuItem_Click);
+            this.newTermToolStripMenuItem.Name = "newTermToolStripMenuItem";
+            this.newTermToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.newTermToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newTermToolStripMenuItem.Text = "New Term";
+            this.newTermToolStripMenuItem.Click += new System.EventHandler(this.NewTermToolStripMenuItem_Click);
+            // 
+            // topicString
+            // 
+            this.topicString.AutoSize = true;
+            this.topicString.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Italic);
+            this.topicString.Location = new System.Drawing.Point(12, 24);
+            this.topicString.Name = "topicString";
+            this.topicString.Size = new System.Drawing.Size(74, 18);
+            this.topicString.TabIndex = 4;
+            this.topicString.Text = "topicString";
             // 
             // MainProgram
             // 
@@ -202,7 +202,7 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cheToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newQuestionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newTermToolStripMenuItem;
     }
 }
 

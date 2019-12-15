@@ -33,6 +33,11 @@ namespace CompendiumApp
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            if (topicBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a topic to begin.");
+                return;
+            }
             Topic topic = dict[topicBox.SelectedItem.ToString()];
 
             // If there are no items the program will infinitely loop, this should be checked

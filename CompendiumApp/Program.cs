@@ -59,13 +59,11 @@ namespace CompendiumApp
     {
         public static List<Topic> topics = new List<Topic>();
         public static List<Term> terms = new List<Term>();
-        static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\tsclient\S\,\CSDefs.accdb";
+        static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Adam\Desktop\CSDefs.accdb";
         static OleDbConnection con = new OleDbConnection(connectionString);
 
         public static void UpdateTopics()
         {
-            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\tsclient\S\,\CSDefs.accdb";
-            OleDbConnection con = new OleDbConnection(connectionString);
             OleDbCommand command = new OleDbCommand();
             command.CommandText = "SELECT * FROM topics";
             command.Connection = con;
@@ -123,15 +121,39 @@ namespace CompendiumApp
         {
             string termString = string.Join(",", terms);
             int topicId = topic.id;
+            // Add new term
             OleDbCommand command = new OleDbCommand();
-            command.Connection = DataController.con;
+            command.Connection = con;
             command.CommandText = "INSERT INTO terms (`Topic Number`, Term, Definition) values (?, ?, ?)";
             command.Parameters.AddWithValue("`Topic Number`", topicId);
             command.Parameters.AddWithValue("Term", termString);
             command.Parameters.AddWithValue("Definition", definition);
+            
             con.Open();
             command.ExecuteNonQuery();
+
+            // Get ID of new term
+            OleDbCommand command2 = new OleDbCommand();
+            command2.CommandText = "SELECT MAX(ID) FROM terms";
+            command2.Connection = con;
+            int id = -1;
+            using (OleDbDataReader reader = command2.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    id = reader.GetInt32(0);
+                }
+            }
             con.Close();
+            // Failsafe
+            if (id == -1)
+            {
+                MessageBox.Show("Error whilst adding question. Restart app.", "Critical error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+
+            Term newTerm = new Term(id, topic, termString, definition);
+            DataController.terms.Add(newTerm);
         }
     }
 

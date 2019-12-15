@@ -75,14 +75,14 @@ namespace CompendiumApp
             MessageBox.Show(answerString);
         }
 
-        private void NewQuestionToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NewTermToolStripMenuItem_Click(object sender, EventArgs e)
         {
             /*string[] terms = new string[2];
             string definition = "Test defintion";
             terms[0] = "Test answer 1";
             terms[1] = "Test answer 2";
             DataController.AddTerm(this.currentTopic, terms, definition);*/
-            NewTerm newterm = new NewTerm();
+            NewTerm newterm = new NewTerm(this.currentTopic);
             newterm.ShowDialog();
         }
     }

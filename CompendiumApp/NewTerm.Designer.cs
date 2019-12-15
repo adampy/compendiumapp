@@ -28,13 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.topicComboBox = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.termInputBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -42,7 +46,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(150, 9);
+            this.label1.Location = new System.Drawing.Point(231, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(165, 42);
             this.label1.TabIndex = 1;
@@ -61,12 +65,14 @@
             // 
             // topicComboBox
             // 
+            this.topicComboBox.Enabled = false;
             this.topicComboBox.Font = new System.Drawing.Font("Calibri", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.topicComboBox.FormattingEnabled = true;
             this.topicComboBox.Location = new System.Drawing.Point(93, 60);
             this.topicComboBox.Name = "topicComboBox";
-            this.topicComboBox.Size = new System.Drawing.Size(372, 44);
+            this.topicComboBox.Size = new System.Drawing.Size(569, 44);
             this.topicComboBox.TabIndex = 3;
+            this.topicComboBox.TabStop = false;
             // 
             // textBox1
             // 
@@ -74,7 +80,7 @@
             this.textBox1.Location = new System.Drawing.Point(18, 119);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(447, 209);
+            this.textBox1.Size = new System.Drawing.Size(644, 184);
             this.textBox1.TabIndex = 4;
             // 
             // label4
@@ -82,38 +88,67 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Calibri", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(12, 392);
+            this.label4.Location = new System.Drawing.Point(12, 398);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(73, 36);
             this.label4.TabIndex = 6;
             this.label4.Text = "Term";
             // 
-            // textBox2
+            // termInputBox
             // 
-            this.textBox2.Font = new System.Drawing.Font("Calibri", 21.75F);
-            this.textBox2.Location = new System.Drawing.Point(93, 389);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(263, 43);
-            this.textBox2.TabIndex = 7;
+            this.termInputBox.Font = new System.Drawing.Font("Calibri", 21.75F);
+            this.termInputBox.Location = new System.Drawing.Point(91, 395);
+            this.termInputBox.Name = "termInputBox";
+            this.termInputBox.Size = new System.Drawing.Size(318, 43);
+            this.termInputBox.TabIndex = 7;
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Calibri", 21.75F);
-            this.button1.Location = new System.Drawing.Point(362, 389);
+            this.button1.Location = new System.Drawing.Point(417, 395);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(103, 43);
+            this.button1.Size = new System.Drawing.Size(137, 43);
             this.button1.TabIndex = 8;
-            this.button1.Text = "Create";
+            this.button1.Text = "Add term";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.button1.Click += new System.EventHandler(this.AddTermClick);
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Calibri", 21.75F);
+            this.button2.Location = new System.Drawing.Point(560, 395);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(103, 43);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "Create";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(14, 316);
+            this.label3.MaximumSize = new System.Drawing.Size(200, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(191, 76);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Acceptable answers - press add term to add multiple correct answers (click to rem" +
+    "ove the term)";
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 10;
             // 
             // NewTerm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(477, 437);
+            this.ClientSize = new System.Drawing.Size(674, 447);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.termInputBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.topicComboBox);
@@ -133,7 +168,10 @@
         private System.Windows.Forms.ComboBox topicComboBox;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox termInputBox;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Timer timer1;
     }
 }

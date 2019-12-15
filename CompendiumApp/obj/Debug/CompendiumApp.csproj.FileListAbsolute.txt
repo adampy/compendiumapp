@@ -10,3 +10,14 @@
 \\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.MainProgram.resources
 \\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.TopicSelect.resources
 \\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.NewTerm.resources
+C:\Users\Adam\Desktop\CompendiumApp\bin\Debug\CompendiumApp.exe.config
+C:\Users\Adam\Desktop\CompendiumApp\bin\Debug\CompendiumApp.exe
+C:\Users\Adam\Desktop\CompendiumApp\bin\Debug\CompendiumApp.pdb
+C:\Users\Adam\Desktop\CompendiumApp\obj\Debug\CompendiumApp.csprojAssemblyReference.cache
+C:\Users\Adam\Desktop\CompendiumApp\obj\Debug\CompendiumApp.MainProgram.resources
+C:\Users\Adam\Desktop\CompendiumApp\obj\Debug\CompendiumApp.NewTerm.resources
+C:\Users\Adam\Desktop\CompendiumApp\obj\Debug\CompendiumApp.Properties.Resources.resources
+C:\Users\Adam\Desktop\CompendiumApp\obj\Debug\CompendiumApp.TopicSelect.resources
+C:\Users\Adam\Desktop\CompendiumApp\obj\Debug\CompendiumApp.csproj.GenerateResource.cache
+C:\Users\Adam\Desktop\CompendiumApp\obj\Debug\CompendiumApp.exe
+C:\Users\Adam\Desktop\CompendiumApp\obj\Debug\CompendiumApp.pdb
