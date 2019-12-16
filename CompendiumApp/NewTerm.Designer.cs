@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.topicComboBox = new System.Windows.Forms.ComboBox();
@@ -36,9 +35,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.termInputBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.createTerm = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -101,6 +99,7 @@
             this.termInputBox.Name = "termInputBox";
             this.termInputBox.Size = new System.Drawing.Size(318, 43);
             this.termInputBox.TabIndex = 7;
+            this.termInputBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TermInputPress);
             // 
             // button1
             // 
@@ -113,15 +112,16 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.AddTermClick);
             // 
-            // button2
+            // createTerm
             // 
-            this.button2.Font = new System.Drawing.Font("Calibri", 21.75F);
-            this.button2.Location = new System.Drawing.Point(560, 395);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(103, 43);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Create";
-            this.button2.UseVisualStyleBackColor = true;
+            this.createTerm.Font = new System.Drawing.Font("Calibri", 21.75F);
+            this.createTerm.Location = new System.Drawing.Point(560, 395);
+            this.createTerm.Name = "createTerm";
+            this.createTerm.Size = new System.Drawing.Size(103, 43);
+            this.createTerm.TabIndex = 9;
+            this.createTerm.Text = "Create";
+            this.createTerm.UseVisualStyleBackColor = true;
+            this.createTerm.Click += new System.EventHandler(this.CreateTerm_Click);
             // 
             // label3
             // 
@@ -136,17 +136,13 @@
             this.label3.Text = "Acceptable answers - press add term to add multiple correct answers (click to rem" +
     "ove the term)";
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 10;
-            // 
             // NewTerm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(674, 447);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.createTerm);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.termInputBox);
             this.Controls.Add(this.label4);
@@ -170,8 +166,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox termInputBox;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button createTerm;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Timer timer1;
     }
 }
