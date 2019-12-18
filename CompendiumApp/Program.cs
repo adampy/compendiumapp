@@ -59,7 +59,7 @@ namespace CompendiumApp
     {
         public static List<Topic> topics = new List<Topic>();
         public static List<Term> terms = new List<Term>();
-        readonly static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\tsclient\S\,\CSDefs.accdb";
+        readonly static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\tsclient\S\,\CompendiumAppData.accdb";
         static OleDbConnection con = new OleDbConnection(connectionString);
 
         public static void UpdateTopics()
@@ -156,6 +156,8 @@ namespace CompendiumApp
             DataController.terms.Add(newTerm);
         }
     }
+
+    // ConfigurationController
 
     // Ends the process of the application - otherwise it will continue to run in the background
     public static class ProgramClosedHandler

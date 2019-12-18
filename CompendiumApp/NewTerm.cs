@@ -13,6 +13,7 @@ namespace CompendiumApp
     public partial class NewTerm : Form
     {
         TagHandler terms;
+        Topic currentTopic = null;
         public NewTerm(Topic currentTopic = null)
         {
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace CompendiumApp
             }
             else
             {
+                this.currentTopic = currentTopic;
                 topicComboBox.Items.Add(currentTopic.name);
                 topicComboBox.SelectedIndex = 0;
             }
@@ -49,13 +51,20 @@ namespace CompendiumApp
 
         private void CreateTerm_Click(object sender, EventArgs e)
         {
-            
+            string definition = textBox1.Text;
+            string[] terms = new string[this.terms.tagList.Count()];
+            for (int i = 0; i < this.terms.tagList.Count(); i++)
+            {
+                terms[i] = this.terms.tagList[i].Text;
+            }
+            DataController.AddTerm(this.currentTopic, terms, definition);
+
         }
     }
 
     public class TagHandler
     {
-        List<Label> tagList = new List<Label>();
+        public List<Label> tagList = new List<Label>();
         Form parent;
         int x;
         int y;

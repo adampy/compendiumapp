@@ -28,32 +28,48 @@ namespace CompendiumApp
 
         public void NextQuestion()
         {
-            int random = this.rand.Next(0, DataController.terms.Count - 1);
-            Term newTerm = DataController.terms[random];
+            List<Term> availableTerms = DataController.terms.FindAll(t => t.topic.id == this.currentTopic.id);
+            int length = availableTerms.Count;
 
-            while (newTerm.topic.id != this.currentTopic.id)
+            // TODO: Not repeat the same question once after the other
+            if (length > 1)
             {
-                random = this.rand.Next(0, DataController.terms.Count - 1);
-                newTerm = DataController.terms[random];
+                while (true)
+                {
+                    int random = this.rand.Next(0, availableTerms.Count);
+                    Term newTerm = availableTerms[random];
+                    if (newTerm != this.currentTerm)
+                    {
+                        this.currentTerm = newTerm;
+                        this.questionString.Text = newTerm.definition;
+                        break;
+                    }
+                }
             }
+            else
+            {
+                this.currentTerm = availableTerms[0];
+                this.questionString.Text = this.currentTerm.definition;
+                return;
+
+            }
+            /*int random = this.rand.Next(0, availableTerms.Count - 1);
+            //Term newTerm = availableTerms[random];
+
             this.currentTerm = newTerm;
-            this.questionString.Text = this.currentTerm.definition;
+            this.questionString.Text = newTerm.definition;*/
         }
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
             string answer = answerBox.Text;
-            answerBox.Text = "";
 
             foreach (string term in this.currentTerm.term)
             {
                 if (answer.ToLower() == term.ToLower())
                 {
                     this.NextQuestion();
-                }
-                else
-                {
-                    MessageBox.Show("Incorrect - " + term);
+                    answerBox.Text = "";
                 }
             }
         }
@@ -73,6 +89,7 @@ namespace CompendiumApp
         {
             string answerString = "Answer(s) are: " + string.Join(", ", this.currentTerm.term);
             MessageBox.Show(answerString);
+            answerBox.Text = this.currentTerm.term[0];
         }
 
         private void NewTermToolStripMenuItem_Click(object sender, EventArgs e)
