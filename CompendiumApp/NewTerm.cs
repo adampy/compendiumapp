@@ -90,9 +90,7 @@ namespace CompendiumApp
             }
             else
             {
-                // Edit the current term
                 DataController.EditTerm(this.currentTerm, terms, definition);
-                //this.parent. // <============= REFRESH QUESTION AFTER EDITING IT - Reference to MainProgram via this.parent but NextQuestion inaccessible
             }
         }
     }

@@ -33,7 +33,6 @@
             this.submitButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.filesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.restartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,9 +40,10 @@
             this.cheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newTermToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.topicString = new System.Windows.Forms.Label();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editTermToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.topicString = new System.Windows.Forms.Label();
+            this.differentTermToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,7 +96,7 @@
             // filesToolStripMenuItem
             // 
             this.filesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.hiToolStripMenuItem,
+            this.differentTermToolStripMenuItem,
             this.toolStripMenuItem1,
             this.restartToolStripMenuItem,
             this.quitToolStripMenuItem});
@@ -104,28 +104,22 @@
             this.filesToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.filesToolStripMenuItem.Text = "File";
             // 
-            // hiToolStripMenuItem
-            // 
-            this.hiToolStripMenuItem.Name = "hiToolStripMenuItem";
-            this.hiToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.hiToolStripMenuItem.Text = "Sample Button 1";
-            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(158, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
             // restartToolStripMenuItem
             // 
             this.restartToolStripMenuItem.Name = "restartToolStripMenuItem";
-            this.restartToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.restartToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.restartToolStripMenuItem.Text = "Restart";
             this.restartToolStripMenuItem.Click += new System.EventHandler(this.RestartToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.QuitToolStripMenuItem_Click);
             // 
@@ -158,19 +152,9 @@
             // 
             this.newTermToolStripMenuItem.Name = "newTermToolStripMenuItem";
             this.newTermToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newTermToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.newTermToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newTermToolStripMenuItem.Text = "New Term";
             this.newTermToolStripMenuItem.Click += new System.EventHandler(this.NewTermToolStripMenuItem_Click);
-            // 
-            // topicString
-            // 
-            this.topicString.AutoSize = true;
-            this.topicString.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Italic);
-            this.topicString.Location = new System.Drawing.Point(12, 24);
-            this.topicString.Name = "topicString";
-            this.topicString.Size = new System.Drawing.Size(74, 18);
-            this.topicString.TabIndex = 4;
-            this.topicString.Text = "topicString";
             // 
             // editToolStripMenuItem
             // 
@@ -184,9 +168,26 @@
             // 
             this.editTermToolStripMenuItem.Name = "editTermToolStripMenuItem";
             this.editTermToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.editTermToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editTermToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.editTermToolStripMenuItem.Text = "Edit Term";
             this.editTermToolStripMenuItem.Click += new System.EventHandler(this.EditTermToolStripMenuItem_Click);
+            // 
+            // topicString
+            // 
+            this.topicString.AutoSize = true;
+            this.topicString.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Italic);
+            this.topicString.Location = new System.Drawing.Point(12, 24);
+            this.topicString.Name = "topicString";
+            this.topicString.Size = new System.Drawing.Size(74, 18);
+            this.topicString.TabIndex = 4;
+            this.topicString.Text = "topicString";
+            // 
+            // differentTermToolStripMenuItem
+            // 
+            this.differentTermToolStripMenuItem.Name = "differentTermToolStripMenuItem";
+            this.differentTermToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.differentTermToolStripMenuItem.Text = "Different Term";
+            this.differentTermToolStripMenuItem.Click += new System.EventHandler(this.DifferentTermToolStripMenuItem_Click);
             // 
             // MainProgram
             // 
@@ -214,7 +215,6 @@
         private System.Windows.Forms.Button submitButton;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem filesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hiToolStripMenuItem;
         private System.Windows.Forms.Label topicString;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem restartToolStripMenuItem;
@@ -225,6 +225,7 @@
         private System.Windows.Forms.ToolStripMenuItem newTermToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editTermToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem differentTermToolStripMenuItem;
     }
 }
 

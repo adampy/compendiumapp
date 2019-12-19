@@ -98,6 +98,10 @@ namespace CompendiumApp
             NewTerm newterm = new NewTerm(this.currentTopic);
             newterm.ShowDialog();
         }
+        private void DifferentTermToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.NextQuestion();
+        }
         #endregion
 
         private void AnswerBoxEnter(object sender, KeyEventArgs e)
