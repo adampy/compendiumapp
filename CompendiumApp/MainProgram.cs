@@ -31,7 +31,6 @@ namespace CompendiumApp
             List<Term> availableTerms = DataController.terms.FindAll(t => t.topic.id == this.currentTopic.id);
             int length = availableTerms.Count;
 
-            // TODO: Not repeat the same question once after the other
             if (length > 1)
             {
                 while (true)
@@ -53,11 +52,6 @@ namespace CompendiumApp
                 return;
 
             }
-            /*int random = this.rand.Next(0, availableTerms.Count - 1);
-            //Term newTerm = availableTerms[random];
-
-            this.currentTerm = newTerm;
-            this.questionString.Text = newTerm.definition;*/
         }
 
         private void SubmitButton_Click(object sender, EventArgs e)
@@ -74,7 +68,7 @@ namespace CompendiumApp
             }
         }
 
-        // Tool Strip Procedures
+        #region Tool Strip Procedures
         private void RestartToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Restart();
@@ -92,15 +86,26 @@ namespace CompendiumApp
             answerBox.Text = this.currentTerm.term[0];
         }
 
+        private void EditTermToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewTerm editTerm = new NewTerm(this.currentTopic, this.currentTerm);
+            editTerm.ShowDialog();
+            this.NextQuestion();
+        }
+
         private void NewTermToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            /*string[] terms = new string[2];
-            string definition = "Test defintion";
-            terms[0] = "Test answer 1";
-            terms[1] = "Test answer 2";
-            DataController.AddTerm(this.currentTopic, terms, definition);*/
             NewTerm newterm = new NewTerm(this.currentTopic);
             newterm.ShowDialog();
+        }
+        #endregion
+
+        private void AnswerBoxEnter(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SubmitButton_Click(sender, e);
+            }
         }
     }
 }

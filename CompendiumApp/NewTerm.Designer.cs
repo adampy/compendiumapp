@@ -37,6 +37,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.createTerm = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.termId = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -136,11 +137,24 @@
             this.label3.Text = "Acceptable answers - press add term to add multiple correct answers (click to rem" +
     "ove the term)";
             // 
+            // termId
+            // 
+            this.termId.AutoSize = true;
+            this.termId.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.termId.ForeColor = System.Drawing.Color.Black;
+            this.termId.Location = new System.Drawing.Point(12, 9);
+            this.termId.MaximumSize = new System.Drawing.Size(200, 0);
+            this.termId.Name = "termId";
+            this.termId.Size = new System.Drawing.Size(51, 19);
+            this.termId.TabIndex = 11;
+            this.termId.Text = "termId";
+            // 
             // NewTerm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(674, 447);
+            this.Controls.Add(this.termId);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.createTerm);
             this.Controls.Add(this.button1);
@@ -168,5 +182,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button createTerm;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label termId;
     }
 }

@@ -14,7 +14,9 @@ namespace CompendiumApp
     {
         TagHandler terms;
         Topic currentTopic = null;
-        public NewTerm(Topic currentTopic = null)
+        Term currentTerm = null;
+        bool editMode;
+        public NewTerm(Topic currentTopic = null, Term currentTerm = null)
         {
             InitializeComponent();
             this.terms = new TagHandler(this);
@@ -25,9 +27,32 @@ namespace CompendiumApp
             }
             else
             {
+                // TODO: Add capability to cross-change terms
                 this.currentTopic = currentTopic;
                 topicComboBox.Items.Add(currentTopic.name);
                 topicComboBox.SelectedIndex = 0;
+            }
+
+            if (currentTerm != null)
+            {
+                editMode = true;
+                topicComboBox.Items.Add(currentTopic.name);
+                topicComboBox.SelectedIndex = 0;
+                label1.Text = "Edit Term";
+                textBox1.Text = currentTerm.definition;
+                termId.Text = "Term: #" + currentTerm.id.ToString();
+
+                this.currentTerm = currentTerm;
+                foreach (string term in currentTerm.term)
+                {
+
+                    terms.AddTag(term);
+                }
+                createTerm.Text = "Edit";
+            }
+            else
+            {
+                termId.Hide();
             }
         }
 
@@ -57,8 +82,18 @@ namespace CompendiumApp
             {
                 terms[i] = this.terms.tagList[i].Text;
             }
-            DataController.AddTerm(this.currentTopic, terms, definition);
 
+            if (!editMode)
+            {
+                // Add the current term
+                DataController.AddTerm(this.currentTopic, terms, definition);
+            }
+            else
+            {
+                // Edit the current term
+                DataController.EditTerm(this.currentTerm, terms, definition);
+                //this.parent. // <============= REFRESH QUESTION AFTER EDITING IT - Reference to MainProgram via this.parent but NextQuestion inaccessible
+            }
         }
     }
 

@@ -155,9 +155,31 @@ namespace CompendiumApp
             Term newTerm = new Term(id, topic, termString, definition);
             DataController.terms.Add(newTerm);
         }
+
+        public static void EditTerm(Term term, string[] terms, string definition)
+        {
+            string termString = string.Join(",", terms);
+
+            OleDbCommand command = new OleDbCommand();
+            command.Connection = con;
+            command.CommandText = "UPDATE terms SET `Term` = ?, `Definition` = ? WHERE `ID` = ?";
+            command.Parameters.AddWithValue("`Term`", termString);
+            command.Parameters.AddWithValue("`Definition`", definition);
+            command.Parameters.AddWithValue("`ID`", term.id);
+
+            con.Open();
+            command.ExecuteNonQuery();
+            con.Close();
+
+            MessageBox.Show("Term #" + term.id.ToString() + " has been edited accordingly.");
+
+            DataController.terms.Remove(term);
+            Term newTerm = new Term(term.id, term.topic, termString, definition);
+            DataController.terms.Add(newTerm);
+        }
     }
 
-    // ConfigurationController
+    // TODO: ConfigurationController
 
     // Ends the process of the application - otherwise it will continue to run in the background
     public static class ProgramClosedHandler
