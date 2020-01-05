@@ -64,7 +64,6 @@
             // 
             // topicComboBox
             // 
-            this.topicComboBox.Enabled = false;
             this.topicComboBox.Font = new System.Drawing.Font("Calibri", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.topicComboBox.FormattingEnabled = true;
             this.topicComboBox.Location = new System.Drawing.Point(93, 60);

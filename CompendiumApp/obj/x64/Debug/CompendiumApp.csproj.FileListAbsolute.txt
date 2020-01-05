@@ -9,3 +9,4 @@ C:\Users\Adam\Desktop\CompendiumApp\obj\x64\Debug\CompendiumApp.TopicSelect.reso
 C:\Users\Adam\Desktop\CompendiumApp\obj\x64\Debug\CompendiumApp.csproj.GenerateResource.cache
 C:\Users\Adam\Desktop\CompendiumApp\obj\x64\Debug\CompendiumApp.exe
 C:\Users\Adam\Desktop\CompendiumApp\obj\x64\Debug\CompendiumApp.pdb
+C:\Users\Adam\Desktop\CompendiumApp\obj\x64\Debug\CompendiumApp.NewTopic.resources

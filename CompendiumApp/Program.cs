@@ -22,7 +22,9 @@ namespace CompendiumApp
             // Start program
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TopicSelect());
+            TopicSelect topic = new TopicSelect();
+            WindowController.topic = topic;
+            Application.Run(WindowController.topic);
         }
     }
     public class Term
@@ -47,19 +49,28 @@ namespace CompendiumApp
     {
         public int id;
         public string name;
+        public string colour;
 
-        public Topic(int id, string name)
+        public Topic(int id, string name, string colour)
         {
             this.id = id;
             this.name = name;
+            this.colour = colour;
         }
+    }
+
+    // Allows us to access the windows from any file
+    public static class WindowController
+    {
+        public static TopicSelect topic;
+        public static MainProgram main;
     }
 
     public static class DataController
     {
         public static List<Topic> topics = new List<Topic>();
         public static List<Term> terms = new List<Term>();
-        readonly static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\tsclient\S\,\CompendiumAppData.accdb";
+        readonly static string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Adam\Desktop\CompendiumAppData.accdb";
         static OleDbConnection con = new OleDbConnection(connectionString);
 
         public static void UpdateTopics()
@@ -75,7 +86,8 @@ namespace CompendiumApp
                 {
                     int id = reader.GetInt32(0); //topic id
                     string name = reader.GetString(1); //topic name
-                    Topic topic = new Topic(id, name);
+                    string colour = reader.GetString(2); //colour string
+                    Topic topic = new Topic(id, name, colour);
                     topics.Add(topic);
                 }
             }
@@ -117,6 +129,7 @@ namespace CompendiumApp
             command.Dispose();
         }
 
+        #region Terms
         public static void AddTerm(Topic topic, string[] terms, string definition)
         {
             string termString = string.Join(",", terms);
@@ -131,6 +144,7 @@ namespace CompendiumApp
             
             con.Open();
             command.ExecuteNonQuery();
+            command.Dispose();
 
             // Get ID of new term
             OleDbCommand command2 = new OleDbCommand();
@@ -145,6 +159,7 @@ namespace CompendiumApp
                 }
             }
             con.Close();
+            command2.Dispose();
             // Failsafe
             if (id == -1)
             {
@@ -155,7 +170,6 @@ namespace CompendiumApp
             Term newTerm = new Term(id, topic, termString, definition);
             DataController.terms.Add(newTerm);
         }
-
         public static void EditTerm(Term term, string[] terms, string definition)
         {
             string termString = string.Join(",", terms);
@@ -170,13 +184,99 @@ namespace CompendiumApp
             con.Open();
             command.ExecuteNonQuery();
             con.Close();
-
-            MessageBox.Show("Term #" + term.id.ToString() + " has been edited accordingly.");
+            command.Dispose();
 
             DataController.terms.Remove(term);
             Term newTerm = new Term(term.id, term.topic, termString, definition);
             DataController.terms.Add(newTerm);
         }
+        public static void DeleteTerm(Term term)
+        {
+            int id = term.id;
+            OleDbCommand command = new OleDbCommand();
+            command.Connection = con;
+            command.CommandText = "DELETE FROM terms WHERE `ID` = ?";
+            command.Parameters.AddWithValue("`ID`", id);
+            con.Open();
+            command.ExecuteNonQuery();
+            con.Close();
+            command.Dispose();
+
+            DataController.terms.Remove(term);
+        }
+        #endregion
+
+        #region Topics
+        public static void AddTopic(string topicName, string colour)
+        {
+            // Add topic
+            OleDbCommand command = new OleDbCommand();
+            command.Connection = con;
+            command.CommandText = "INSERT INTO topics (topic, colour) VALUES (?, ?)";
+            command.Parameters.AddWithValue("topic", topicName);
+            command.Parameters.AddWithValue("colour", colour);
+            con.Open();
+            command.ExecuteNonQuery();
+            con.Close();
+
+            // Get ID of the newest topic so it can be added
+            OleDbCommand command2 = new OleDbCommand();
+            command2.CommandText = "SELECT MAX(ID) FROM topics";
+            command2.Connection = con;
+            int id = -1;
+            con.Open();
+            using (OleDbDataReader reader = command2.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    id = reader.GetInt32(0);
+                }
+            }
+            con.Close();
+            command2.Dispose();
+
+            Topic topic = new Topic(id, topicName, colour);
+            DataController.topics.Add(topic);
+        }
+        public static void EditTopic(Topic topic)
+        {
+            OleDbCommand command = new OleDbCommand();
+            command.Connection = con;
+            command.CommandText = "UPDATE topics SET topic = ?, colour = ? WHERE id = ?";
+            command.Parameters.AddWithValue("topic", topic.name);
+            command.Parameters.AddWithValue("colour", topic.colour);
+            command.Parameters.AddWithValue("id", topic.id);
+            con.Open();
+            command.ExecuteNonQuery();
+            con.Close();
+        }
+        public static void DeleteTopic(Topic toDelete)
+        {
+            // Delete from the Topics table
+            OleDbCommand command = new OleDbCommand();
+            command.Connection = con;
+            command.CommandText = "DELETE FROM topics WHERE `ID` = ?";
+            command.Parameters.AddWithValue("`ID`", toDelete.id);
+
+            // Delete from terms table
+            OleDbCommand command2 = new OleDbCommand();
+            command2.Connection = con;
+            command2.CommandText = "DELETE FROM terms WHERE `Topic Number` = ?";
+            command2.Parameters.AddWithValue("`Topic Number`", toDelete.id);
+            
+            // Execute both commands
+            con.Open();
+            command.ExecuteNonQuery();
+            command2.ExecuteNonQuery();
+            command.Dispose();
+            command2.Dispose();
+            con.Close();
+
+            DataController.topics.RemoveAll(t => t.id == toDelete.id);
+            DataController.terms.RemoveAll(t => t.topic.id == toDelete.id);
+
+        }
+        #endregion
     }
 
     // TODO: ConfigurationController

@@ -1,0 +1,11 @@
+C:\Users\Adam\Desktop\CompendiumApp\bin\x86\Debug\CompendiumApp.exe.config
+C:\Users\Adam\Desktop\CompendiumApp\bin\x86\Debug\CompendiumApp.exe
+C:\Users\Adam\Desktop\CompendiumApp\bin\x86\Debug\CompendiumApp.pdb
+C:\Users\Adam\Desktop\CompendiumApp\obj\x86\Debug\CompendiumApp.csprojAssemblyReference.cache
+C:\Users\Adam\Desktop\CompendiumApp\obj\x86\Debug\CompendiumApp.MainProgram.resources
+C:\Users\Adam\Desktop\CompendiumApp\obj\x86\Debug\CompendiumApp.NewTerm.resources
+C:\Users\Adam\Desktop\CompendiumApp\obj\x86\Debug\CompendiumApp.Properties.Resources.resources
+C:\Users\Adam\Desktop\CompendiumApp\obj\x86\Debug\CompendiumApp.TopicSelect.resources
+C:\Users\Adam\Desktop\CompendiumApp\obj\x86\Debug\CompendiumApp.csproj.GenerateResource.cache
+C:\Users\Adam\Desktop\CompendiumApp\obj\x86\Debug\CompendiumApp.exe
+C:\Users\Adam\Desktop\CompendiumApp\obj\x86\Debug\CompendiumApp.pdb

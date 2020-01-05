@@ -16,52 +16,51 @@ namespace CompendiumApp
         Topic currentTopic = null;
         Term currentTerm = null;
         bool editMode;
+        Dictionary<int, Topic> dict = new Dictionary<int, Topic>(); // Used to convert the topic in topicComboBox (its index inside the combobox as a key) into its ID
         public NewTerm(Topic currentTopic = null, Term currentTerm = null)
         {
+            // currentTopic is passed when called from NewTerm
+            // currentTopic AND currentTerm are passed when called from EditTerm
+
             InitializeComponent();
             this.terms = new TagHandler(this);
 
-            if (currentTopic is null)
+            this.currentTopic = currentTopic;
+            for (int i = 0; i < DataController.topics.Count; i++)
             {
-                // Enable the dropdown
+                Topic topic = DataController.topics[i];
+                topicComboBox.Items.Add(topic.name);
+                this.dict.Add(i, topic);
             }
-            else
-            {
-                // TODO: Add capability to cross-change terms
-                this.currentTopic = currentTopic;
-                topicComboBox.Items.Add(currentTopic.name);
-                topicComboBox.SelectedIndex = 0;
-            }
+            topicComboBox.SelectedIndex = DataController.topics.FindIndex(t => t.id == currentTopic.id);
 
             if (currentTerm != null)
             {
+                // Called from EditTerm
                 editMode = true;
-                topicComboBox.Items.Add(currentTopic.name);
-                topicComboBox.SelectedIndex = 0;
                 label1.Text = "Edit Term";
                 textBox1.Text = currentTerm.definition;
                 termId.Text = "Term: #" + currentTerm.id.ToString();
+                topicComboBox.Enabled = false; // Disables the dropdown
 
                 this.currentTerm = currentTerm;
                 foreach (string term in currentTerm.term)
                 {
-
                     terms.AddTag(term);
                 }
                 createTerm.Text = "Edit";
             }
             else
             {
+                // Called from NewTerm
                 termId.Hide();
             }
         }
 
         private void AddTermClick(object sender, EventArgs e)
         {
-            string newTerm = termInputBox.Text;
+            this.terms.AddTag(termInputBox.Text);
             termInputBox.Text = "";
-
-            this.terms.AddTag(newTerm);
             termInputBox.Focus();
         }
 
@@ -85,13 +84,17 @@ namespace CompendiumApp
 
             if (!editMode)
             {
-                // Add the current term
-                DataController.AddTerm(this.currentTopic, terms, definition);
+                // Get the topic object that's in topicComboBox
+                Topic topic = this.dict[topicComboBox.SelectedIndex];
+                DataController.AddTerm(topic, terms, definition);
+                MessageBox.Show("This term has been added successfully");
             }
             else
             {
                 DataController.EditTerm(this.currentTerm, terms, definition);
+                MessageBox.Show("Term #" + this.currentTerm.id.ToString() + " has been edited accordingly.");
             }
+            this.Close();
         }
     }
 

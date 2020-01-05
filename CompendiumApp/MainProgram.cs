@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using static System.Math;
 
 namespace CompendiumApp
 {
@@ -16,13 +17,16 @@ namespace CompendiumApp
         Random rand = new Random();
         public Term currentTerm;
         public Topic currentTopic;
+        public bool cancel;
 
         public MainProgram(List<Topic> topics, Topic topic)
         {
             this.currentTopic = topic;
+            this.cancel = false;
             InitializeComponent();
             this.FormClosed += new FormClosedEventHandler(ProgramClosedHandler.FormClosed);
-            topicString.Text = this.currentTopic.name;
+
+            this.UpdateTopicString();
             this.NextQuestion();
         }
 
@@ -31,7 +35,40 @@ namespace CompendiumApp
             List<Term> availableTerms = DataController.terms.FindAll(t => t.topic.id == this.currentTopic.id);
             int length = availableTerms.Count;
 
-            if (length > 1)
+            if (length == 0)
+            {
+                DialogResult result = MessageBox.Show("There are no questions in this topic; you need to add at least one. Would you like to add one (Yes), delete the topic (No), or do nothing & change to another topic for now (Cancel)?", "Critical Error", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Error);
+                if (result == DialogResult.Yes)
+                {
+                    // Make a new term - loop until a new term is made
+                    while (length == 0)
+                    {
+                        NewTerm newTerm = new NewTerm(this.currentTopic);
+                        newTerm.ShowDialog();
+                        availableTerms.RemoveAll(t => t != null); //Removes all terms
+                        availableTerms = DataController.terms.FindAll(t => t.topic.id == this.currentTopic.id);
+                        length = availableTerms.Count;
+                    }
+                    Term justMade = availableTerms[0];
+                    this.currentTerm = justMade;
+                    this.questionString.Text = justMade.definition;
+                }
+                else if (result == DialogResult.No)
+                {
+                    // Delete topic
+                    DataController.DeleteTopic(this.currentTopic);
+                    this.cancel = true;
+                    WindowController.topic.Show();
+                    WindowController.topic.RefreshData();
+                    this.Dispose();
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    this.cancel = true;
+                    return;
+                }
+            }
+            else if (length > 1)
             {
                 while (true)
                 {
@@ -95,12 +132,60 @@ namespace CompendiumApp
 
         private void NewTermToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NewTerm newterm = new NewTerm(this.currentTopic);
-            newterm.ShowDialog();
+            NewTerm newTerm = new NewTerm(this.currentTopic);
+            newTerm.ShowDialog();
         }
         private void DifferentTermToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.NextQuestion();
+        }
+
+        private void changeTopicToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WindowController.main.Hide();
+            WindowController.topic.Show();
+            WindowController.topic.RefreshData();
+        }
+
+        private void newTopicToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewTopic newTopic = new NewTopic();
+            newTopic.ShowDialog();
+
+            // Get the newest made topic
+            Topic topic = DataController.topics[DataController.topics.Count - 1];
+            NewTerm newTerm = new NewTerm(topic);
+            newTerm.ShowDialog();
+        }
+
+        private void deleteTermToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult affirm = MessageBox.Show("This action cannot be reverted. Are you sure you want to delete this term?", "Delete Term", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (affirm == DialogResult.Yes)
+            {
+                DataController.DeleteTerm(this.currentTerm);
+                this.NextQuestion();
+            }
+        }
+
+        private void deleteTopicToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult affirm = MessageBox.Show("This action cannot be reverted. Are you sure you want to delete this topic?", "Delete Topic", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (affirm == DialogResult.Yes)
+            {
+                DataController.DeleteTopic(this.currentTopic);
+                WindowController.main.Hide();
+                WindowController.topic.Show();
+                WindowController.topic.RefreshData();
+            }
+        }
+        private void editTopicToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewTopic editTopic = new NewTopic(this.currentTopic);
+            editTopic.ShowDialog();
+            this.currentTopic = DataController.topics.Find(t => t.id == this.currentTopic.id); // Gets the updated topic of the version
+            UpdateTopicString();
+            MessageBox.Show("Your changed have been saved.", "Changed saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
 
@@ -110,6 +195,15 @@ namespace CompendiumApp
             {
                 SubmitButton_Click(sender, e);
             }
+        }
+
+        private void UpdateTopicString()
+        {
+            int textWidth = TextRenderer.MeasureText(this.currentTopic.name, new Font("Calibri", 36.0f, FontStyle.Bold)).Width;
+            int x = (this.Size.Width / 2) - (textWidth / 2);
+            topicString.Text = this.currentTopic.name;
+            topicString.Location = new Point(x, topicString.Location.Y);
+            topicString.ForeColor = System.Drawing.ColorTranslator.FromHtml("#" + this.currentTopic.colour); ;
         }
     }
 }
