@@ -21,3 +21,4 @@ C:\Users\Adam\Desktop\CompendiumApp\obj\Debug\CompendiumApp.TopicSelect.resource
 C:\Users\Adam\Desktop\CompendiumApp\obj\Debug\CompendiumApp.csproj.GenerateResource.cache
 C:\Users\Adam\Desktop\CompendiumApp\obj\Debug\CompendiumApp.exe
 C:\Users\Adam\Desktop\CompendiumApp\obj\Debug\CompendiumApp.pdb
+\\tsclient\S\,\CS Projects\CompendiumApp\obj\Debug\CompendiumApp.NewTopic.resources

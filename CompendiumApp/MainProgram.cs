@@ -52,6 +52,7 @@ namespace CompendiumApp
                     Term justMade = availableTerms[0];
                     this.currentTerm = justMade;
                     this.questionString.Text = justMade.definition;
+                    UpdateLabelPos(this.questionString, justMade.definition);
                 }
                 else if (result == DialogResult.No)
                 {
@@ -78,6 +79,7 @@ namespace CompendiumApp
                     {
                         this.currentTerm = newTerm;
                         this.questionString.Text = newTerm.definition;
+                        UpdateLabelPos(this.questionString, newTerm.definition);
                         break;
                     }
                 }
@@ -86,6 +88,7 @@ namespace CompendiumApp
             {
                 this.currentTerm = availableTerms[0];
                 this.questionString.Text = this.currentTerm.definition;
+                UpdateLabelPos(this.questionString, this.currentTerm.definition);
                 return;
 
             }
@@ -199,11 +202,18 @@ namespace CompendiumApp
 
         private void UpdateTopicString()
         {
-            int textWidth = TextRenderer.MeasureText(this.currentTopic.name, new Font("Calibri", 36.0f, FontStyle.Bold)).Width;
-            int x = (this.Size.Width / 2) - (textWidth / 2);
+            // Updates `topicString` for the given topic, this is ran on each change of `MainProgram`
+            UpdateLabelPos(topicString, this.currentTopic.name);
             topicString.Text = this.currentTopic.name;
-            topicString.Location = new Point(x, topicString.Location.Y);
             topicString.ForeColor = System.Drawing.ColorTranslator.FromHtml("#" + this.currentTopic.colour); ;
         }
+        private void UpdateLabelPos(Label label, string text)
+        {
+            // Centres the position of a `label` inside of `MainProgram`. Uses the `text` variable given to determine the centre.
+            int textWidth = TextRenderer.MeasureText(text, label.Font).Width;
+            int x = (this.Size.Width / 2) - (textWidth / 2);
+            label.Location = new Point(x, label.Location.Y);
+        }
+
     }
 }

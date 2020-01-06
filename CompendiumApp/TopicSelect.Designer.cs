@@ -41,7 +41,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.label1.ForeColor = System.Drawing.Color.Blue;
             this.label1.Location = new System.Drawing.Point(110, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(315, 42);
@@ -78,6 +78,7 @@
             this.label2.Size = new System.Drawing.Size(115, 18);
             this.label2.TabIndex = 3;
             this.label2.Text = "by Adam Crawley";
+            this.label2.Visible = false;
             // 
             // csDefsDataSet1
             // 
