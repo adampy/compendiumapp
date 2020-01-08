@@ -59,9 +59,12 @@ namespace CompendiumApp
 
         private void AddTermClick(object sender, EventArgs e)
         {
-            this.terms.AddTag(termInputBox.Text);
-            termInputBox.Text = "";
-            termInputBox.Focus();
+            if (termInputBox.Text != "")
+            {
+                this.terms.AddTag(termInputBox.Text);
+                termInputBox.Text = "";
+                termInputBox.Focus();
+            }
         }
 
         private void TermInputPress(object sender, KeyEventArgs e)
@@ -87,12 +90,12 @@ namespace CompendiumApp
                 // Get the topic object that's in topicComboBox
                 Topic topic = this.dict[topicComboBox.SelectedIndex];
                 DataController.AddTerm(topic, terms, definition);
-                MessageBox.Show("This term has been added successfully");
+                MessageBox.Show("This term has been added successfully", "New Term", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
                 DataController.EditTerm(this.currentTerm, terms, definition);
-                MessageBox.Show("Term #" + this.currentTerm.id.ToString() + " has been edited accordingly.");
+                MessageBox.Show("Term #" + this.currentTerm.id.ToString() + " has been edited accordingly.", "Edit Term", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             this.Close();
         }

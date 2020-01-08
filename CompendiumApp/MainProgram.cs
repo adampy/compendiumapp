@@ -66,6 +66,12 @@ namespace CompendiumApp
                 else if (result == DialogResult.Cancel)
                 {
                     this.cancel = true;
+                    try
+                    {
+                        WindowController.main.Hide();
+                    }
+                    catch { }
+                    WindowController.topic.Show();
                     return;
                 }
             }
