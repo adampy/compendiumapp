@@ -50,6 +50,7 @@ namespace CompendiumApp
             this.topic.name = topicNameBox.Text;
             this.topic.colour = textBox2.Text;
             DataController.EditTopic(this.topic);
+            MessageBox.Show("Your changed have been saved.", "Changes saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
             this.Dispose();
         }

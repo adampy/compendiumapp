@@ -142,7 +142,7 @@ namespace CompendiumApp
 
             if (x + textWidth + 4 > 660)
             {
-                x = DEFAULTX; y = DEFAULTY;
+                x = DEFAULTX; y = DEFAULTY + 40;
             }
 
             Point location2 = new Point(x, y);

@@ -280,6 +280,7 @@ namespace CompendiumApp
     }
 
     // TODO: ConfigurationController
+    // TODO: StatsController
 
     // Ends the process of the application - otherwise it will continue to run in the background
     public static class ProgramClosedHandler
